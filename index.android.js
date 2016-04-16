@@ -7,6 +7,7 @@ import Voice from 'react-native-android-voice';
 import axios from 'axios'
 import tts from 'react-native-android-speech';
 
+import CompanyContainer from './CompanyContainer.js';
 
 import React, {
   AppRegistry,
@@ -93,7 +94,9 @@ class firi extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.companyText}>{this.state.company || "Select company (DowJones)"}</Text>
+        <Text style={styles.companyText}>{this.state.company || "Say \"search\" company"}</Text>
+        <CompanyContainer
+          company={this.state.company}/>
         <View style={styles.roundbutton}>
           <Voice
             onPress={this.onPress.bind(this)}
@@ -126,9 +129,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   companyText:{
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
     marginTop: 10,
+    textAlign:'center',
   },
 });
 
