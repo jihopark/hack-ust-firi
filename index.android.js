@@ -4,7 +4,7 @@
  */
 
 import Voice from 'react-native-android-voice';
-
+import axios from 'axios'
 
 import React, {
   AppRegistry,
@@ -12,7 +12,7 @@ import React, {
   StyleSheet,
   Text,
   Image,
-  View
+  View,
 } from 'react-native';
 
 
@@ -23,7 +23,16 @@ class firi extends Component {
       company: "",
       listening: false,
     };
+
+    this.sendToAPIAI = this.sendToAPIAI.bind(this);
+    this.handleResponse = this.handleResponse.bind(this);
   }
+
+  componentDidMount() {
+    axios.defaults.baseURL = 'https://api.api.ai/v1/';
+    axios.defaults.headers.common['Authorization'] = "Bearer 788301c331bf4fa796fe7973dbbf5222";
+  }
+
   onPress(e){
     this.setState({listening:true});
     Voice.startSpeech('en');
@@ -36,6 +45,29 @@ class firi extends Component {
   onResults(e) {
     if (e.speech) {
       console.log(e.speech);
+      console.log("pick" + e.speech.split("\n")[0]);
+      this.sendToAPIAI(e.speech.split("\n")[0]);
+    }
+  }
+
+  sendToAPIAI(text) {
+    text = text.replace('&',"and");
+    console.log("/query?lang=EN&query="+text);
+    axios.get('/query?lang=EN&query='+text)
+    .then(this.handleResponse)
+    .catch(function (response) {
+      console.log(response);
+    });
+  }
+
+  handleResponse(response){
+    console.log(response);
+    var intent = response.data.result.metadata.intentName;
+    console.log("intent" + intent);
+    if (intent == "search_company") {
+      var company = response.data.result.parameters.company;
+      console.log("search " + company);
+      this.setState({company:company});
     }
   }
 
