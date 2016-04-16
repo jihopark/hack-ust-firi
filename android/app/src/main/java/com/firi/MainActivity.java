@@ -5,6 +5,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
 import com.wmjmc.reactspeech.VoicePackage;
+import com.mihir.react.tts.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RCTTextToSpeechModule(),
             new VoicePackage()); // <--- added here
 
     }

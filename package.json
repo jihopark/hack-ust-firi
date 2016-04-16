@@ -8,6 +8,7 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.23.1",
+    "react-native-android-speech": "0.0.5",
     "react-native-android-voice": "git://github.com/wenkesj/react-native-android-voice.git"
   }
 }

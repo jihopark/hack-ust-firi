@@ -5,6 +5,8 @@
 
 import Voice from 'react-native-android-voice';
 import axios from 'axios'
+import tts from 'react-native-android-speech';
+
 
 import React, {
   AppRegistry,
@@ -26,6 +28,7 @@ class firi extends Component {
 
     this.sendToAPIAI = this.sendToAPIAI.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
+    this.speakOut = this.speakOut.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +71,22 @@ class firi extends Component {
       var company = response.data.result.parameters.company;
       console.log("search " + company);
       this.setState({company:company});
+      this.speakOut(company);
     }
+    else{
+      this.speakOut("Sorry, I don't understand.");
+    }
+  }
+
+  speakOut(text) {
+    tts.speak({
+        text: text,
+        pitch:1.0,
+    }).then(isSpeaking=>{
+        console.log(isSpeaking);
+    }).catch(error=>{
+        console.log(error)
+    });
   }
 
   render() {
