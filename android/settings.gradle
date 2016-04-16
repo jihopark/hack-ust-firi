@@ -1,0 +1,5 @@
+rootProject.name = 'firi'
+
+include ':app'
+include ':VoiceModule', ':app'
+project(':VoiceModule').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-android-voice')
