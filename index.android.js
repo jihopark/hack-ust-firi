@@ -23,7 +23,7 @@ class firi extends Component {
   constructor(){
     super();
     this.state ={
-      company: "Apple",
+      company: "",
       listening: false,
       count: 0,
     };
