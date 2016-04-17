@@ -24,6 +24,7 @@ class firi extends Component {
     super();
     this.state ={
       company: "",
+      compare_company: "",
       listening: false,
       count: 0,
     };
@@ -73,12 +74,17 @@ class firi extends Component {
       case "search_company":
         var company = response.data.result.parameters.company;
         console.log("search " + company);
-        this.setState({company:company, count: 0});
+        this.setState({company:company, count: 0, compare_company:""});
         break;
       case "change_window":
       case "clear_chart":
       case "add_sma":
         this.setState({count:this.state.count+1});
+        break;
+      case "compare":
+        var comp = response.data.result.parameters.compare_company;
+        if (comp)
+          this.setState({compare_company: comp});
         break;
       default:
         this.speakOut("Sorry, I don't understand.");
@@ -107,7 +113,9 @@ class firi extends Component {
 
         <Text style={styles.companyText}>{this.state.company || "Say \"search\" company"}</Text>
         <CompanyContainer
-          company={this.state.company} count={this.state.count}/>
+          company={this.state.company}
+          count={this.state.count}
+          compare_company={this.state.compare_company}/>
         <View style={styles.roundbutton}>
           <Voice
             onPress={this.onPress.bind(this)}

@@ -107,12 +107,8 @@ class CompanyContainer extends Component {
   }
 
   //0:Full name, 1:CODE, 2:STOCK PRICe, 3:Change, 4:Close Date, 5:Category
-
-  render(){
-    console.log("Data");
-    console.log(this.data);
-    var d = this.data[this.props.company];
-    return this.props.company ? (<View style={{height: 500, alignSelf:'stretch'}}>
+  getCompanyOverview(d) {
+      return (
         <View style={{flex:1, justifyContent:'center'}}>
           <Text style={{fontSize:12, textAlign:'center'}}>{d[6]}</Text>
           <Text style={{fontSize:20, textAlign:'center'}}>{d[1]}</Text>
@@ -126,28 +122,41 @@ class CompanyContainer extends Component {
               <Image source={chartImage[d[0]]} style={{width: 200, height: 100, resizeMode: "contain", alignSelf:'center', justifyContent:'center'}}/>
             </View>
           </View>
-        </View>
-        <View style={{flex:1,backgroundColor:'white', flexDirection: 'column'}}>
-          <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}} >
-            <Text style={{fontWeight:'bold'}}>Overview</Text>
-            <Text>Price/Charts</Text>
-            <Text>Financials</Text>
-            <Text>News</Text>
-            <Text>Debate</Text>
-            <Picker
-              style={{width:20}}
-              selectedValue={""}
-              onValueChange={this.showDatePicker.bind(this)}>
-              <Picker.Item label={"Simple Moving Average"} value={"Simple Moving Average"} />
-              <Picker.Item label={"Exponential Moving Average"} value={"Exponential Moving Average"} />
-              <Picker.Item label={"Bollinger Bands"} value={"Bollinger Bands"} />
-              <Picker.Item label={"Volume"} value={"Volume"} />
-              <Picker.Item label={"Volatility"} value={"Volatility"} />
-              <Picker.Item label={"Benchmarking Index"} value={"Benchmarking Index"} />
-            </Picker>
-          </View>
-          <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
-        </View>
+        </View>);
+  }
+
+
+  render(){
+    console.log("compare_company " + this.props.compare_company);
+    var d = this.data[this.props.company];
+    return this.props.company ? (<View style={{height: 500, alignSelf:'stretch'}}>
+        {this.getCompanyOverview(d)}
+        {
+          this.props.compare_company ?
+            this.getCompanyOverview(this.data[this.props.compare_company])
+          :
+          (<View style={{flex:1,backgroundColor:'white', flexDirection: 'column'}}>
+            <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}} >
+              <Text style={{fontWeight:'bold'}}>Overview</Text>
+              <Text>Price/Charts</Text>
+              <Text>Financials</Text>
+              <Text>News</Text>
+              <Text>Debate</Text>
+              <Picker
+                style={{width:20}}
+                selectedValue={""}
+                onValueChange={this.showDatePicker.bind(this)}>
+                <Picker.Item label={"Simple Moving Average"} value={"Simple Moving Average"} />
+                <Picker.Item label={"Exponential Moving Average"} value={"Exponential Moving Average"} />
+                <Picker.Item label={"Bollinger Bands"} value={"Bollinger Bands"} />
+                <Picker.Item label={"Volume"} value={"Volume"} />
+                <Picker.Item label={"Volatility"} value={"Volatility"} />
+                <Picker.Item label={"Benchmarking Index"} value={"Benchmarking Index"} />
+              </Picker>
+            </View>
+            <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
+          </View>)
+        }
       </View>)
     : null;
   }
