@@ -4,6 +4,7 @@ import React, {
   StyleSheet,
   Text,
   View,
+  Image,
 } from 'react-native';
 
 
@@ -28,6 +29,9 @@ var change = ["Dupont	E I Du Pont De Nemours & Co	(NYSE:DD)	65.24	+0.06 (0.09%)	
 "Johnson and Johnson	Johnson & Johnson	(NYSE:JNJ)	110.11	+0.31 (0.28%)	Apr 15 - Close	Healthcare",
 "Cocacola	The Coca-Cola Co	(NYSE:KO)	46.09	+0.26 (0.57%)	Apr 15 - Close	Non-cyclical Consumer Goods & Services",]
 */
+
+const fakePic = [require('./assets/3M.png'),require('./assets/2Y.png'),require('./assets/2Y-20.png'),require('./assets/2Y-20-40.png'),require('./assets/2Y.png')];
+
 class CompanyContainer extends Component {
   componentDidMount(){
 
@@ -49,8 +53,8 @@ class CompanyContainer extends Component {
             </View>
           </View>
         </View>
-        <View style={{flex:1,backgroundColor:'red'}}>
-          <Text>Company Chart</Text>
+        <View style={{flex:1,backgroundColor:'white'}}>
+          <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
         </View>
       </View>)
     : null;

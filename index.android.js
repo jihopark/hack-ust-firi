@@ -25,6 +25,7 @@ class firi extends Component {
     this.state ={
       company: "",
       listening: false,
+      count: 0,
     };
 
     this.sendToAPIAI = this.sendToAPIAI.bind(this);
@@ -68,18 +69,28 @@ class firi extends Component {
     console.log(response);
     var intent = response.data.result.metadata.intentName;
     console.log("intent" + intent);
-    if (intent == "search_company") {
-      var company = response.data.result.parameters.company;
-      console.log("search " + company);
-      this.setState({company:company});
-      this.speakOut(company);
+    switch (intent) {
+      case "search_company":
+        var company = response.data.result.parameters.company;
+        console.log("search " + company);
+        this.setState({company:company, count: 0});
+        break;
+      case "change_window":
+      case "clear_chart":
+      case "add_sma":
+        this.setState({count:this.state.count+1});
+        break;
+      default:
+        this.speakOut("Sorry, I don't understand.");
     }
-    else{
-      this.speakOut("Sorry, I don't understand.");
-    }
+
+    var speech = response.data.result.speech;
+    if (speech)
+      this.speakOut(speech);
   }
 
   speakOut(text) {
+    console.log("Speaking " + text);
     tts.speak({
         text: text,
         pitch:1.0,
@@ -96,7 +107,7 @@ class firi extends Component {
 
         <Text style={styles.companyText}>{this.state.company || "Say \"search\" company"}</Text>
         <CompanyContainer
-          company={this.state.company}/>
+          company={this.state.company} count={this.state.count}/>
         <View style={styles.roundbutton}>
           <Voice
             onPress={this.onPress.bind(this)}
