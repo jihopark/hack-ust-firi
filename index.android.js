@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 5,
     marginBottom: 20,
+    marginTop: 5,
   },
   companyText:{
     fontSize: 30,

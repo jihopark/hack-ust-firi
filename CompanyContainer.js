@@ -72,13 +72,20 @@ class CompanyContainer extends Component {
           </View>
         </View>
         <View style={{flex:1,backgroundColor:'white', flexDirection: 'column'}}>
-          <Picker
-            style={{width:100}}
-            selectedValue={"java"}
-            onValueChange={this.showDatePicker.bind(this)}>
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
+          <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}} >
+            <Text style={{fontWeight:'bold'}}>Overview</Text>
+            <Text>Price/Charts</Text>
+            <Text>Financials</Text>
+            <Text>News</Text>
+            <Text>Debate</Text>
+            <Picker
+              style={{width:20}}
+              selectedValue={"java"}
+              onValueChange={this.showDatePicker.bind(this)}>
+              <Picker.Item label="Java" value="java" />
+              <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+          </View>
           <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
         </View>
       </View>)
