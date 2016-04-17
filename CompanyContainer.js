@@ -7,6 +7,7 @@ import React, {
   Image,
   Picker,
   TimePickerAndroid,
+  ScrollView,
 } from 'react-native';
 
 const data = [
@@ -154,7 +155,9 @@ class CompanyContainer extends Component {
                 <Picker.Item label={"Benchmarking Index"} value={"Benchmarking Index"} />
               </Picker>
             </View>
-            <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
+            <ScrollView style={{width: 500,}} horizontal={true}>
+            <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width: 680, height:300}} />
+            </ScrollView>
           </View>)
         }
       </View>)
