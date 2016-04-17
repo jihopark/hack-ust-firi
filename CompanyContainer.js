@@ -34,14 +34,44 @@ const data = [
 "Pfizer	Pfizer Inc.	(NYSE:PFE)	32.5	-0.15 (-0.46%)	Apr 15 - Close	Healthcare",
 "Procter and Gamble	Procter & Gamble Co	(NYSE:PG)	82.29	+0.28 (0.34%)	Apr 15 - Close	Non-Cyclical Consumer Goods & Services",
 "Travelers	Travelers Companies Inc	(NYSE:TRV)	116.23	+0.87 (0.75%)	Apr 15 - Close	Financials",
-"UnitedHealth	UnitedHealth Group Inc	(NYSE:UNH)	127.33	-0.65 (-0.51%)	Apr 15 - Close	Healthcare",
+"United Health	UnitedHealth Group Inc	(NYSE:UNH)	127.33	-0.65 (-0.51%)	Apr 15 - Close	Healthcare",
 "Verizon	Verizon Communications Inc.	(NYSE:VZ)	51.34	-0.02 (-0.04%)	Apr 15 - Close	Telecommunications Services",
 "Visa	Visa Inc	(NYSE:V)	80.07	-0.26 (-0.32%)	Apr 15 - Close	Industrials",
 "Wal Mart	Wal-Mart Stores, Inc.	(NYSE:WMT)	69.08	+0.28 (0.41%)	Apr 15 - Close	Cyclical Consumer Goods & Services",
 "Walt Disney	Walt Disney Co	(NYSE:DIS)	98.58	-0.05 (-0.05%)	Apr 15 - Close	Cyclical Consumer Goods & Services"];
 
 const fakePic = [require('./assets/3M.png'),require('./assets/2Y.png'),require('./assets/2Y-20.png'),require('./assets/2Y-20-40.png'),require('./assets/2Y.png')];
-
+const chartImage = {
+  "American Express": require('./assets/chart/American Express.png'),
+  "Apple": require('./assets/chart/Apple.png'),
+  "Boeing": require('./assets/chart/Boeing.png'),
+  "Caterpillar": require('./assets/chart/Caterpillar.png'),
+  "Cisco Systems": require('./assets/chart/Cisco Systems.png'),
+  "Chevron": require('./assets/chart/Chevron.png'),
+  "Dupont": require('./assets/chart/Dupont.png'),
+  "Exxon Mobil": require('./assets/chart/Exxon Mobil.png'),
+  "General Electric": require('./assets/chart/General Electrics.png'),
+  "Goldman Sachs": require('./assets/chart/Goldman Sachs.png'),
+  "Home Depot": require('./assets/chart/Home Depot.png'),
+  "International Business Machines": require('./assets/chart/IBM.png'),
+  "Intel": require('./assets/chart/Intel.png'),
+  "Johnson and Johnson": require('./assets/chart/Johnson&Johnson.png'),
+  "Cocacola": require('./assets/chart/CocaCola.png'),
+  "JPMorgan Chase": require('./assets/chart/JPMorgan.png'),
+  "McDonald's": require('./assets/chart/McDonald.png'),
+  "3M": require('./assets/chart/3M.png'),
+  "Merck": require('./assets/chart/Merck.png'),
+  "Microsoft": require('./assets/chart/Microsoft.png'),
+  "Nike": require('./assets/chart/Nike.png'),
+  "Pfizer": require('./assets/chart/Pfizer.png'),
+  "Procter and Gamble": require('./assets/chart/Procter&Gamble.png'),
+  "Travelers": require('./assets/chart/Travelers.png'),
+  "United Health": require('./assets/chart/UnitedHealth.png'),
+  "Verizon": require('./assets/chart/Verizon.png'),
+  "Visa": require('./assets/chart/Visa.png'),
+  "Wal Mart": require('./assets/chart/WalMart.png'),
+  "Walt Disney": require('./assets/chart/Walt Disney.png')
+};
 
 
 class CompanyContainer extends Component {
@@ -87,12 +117,13 @@ class CompanyContainer extends Component {
           <Text style={{fontSize:12, textAlign:'center'}}>{d[6]}</Text>
           <Text style={{fontSize:20, textAlign:'center'}}>{d[1]}</Text>
           <Text style={{fontSize:16, textAlign:'center'}}>{d[2]} {d[5]}</Text>
-          <View style={{flexDirection:'row', marginTop:25}}>
-            <View style={{flex:1}}>
+          <View style={{flexDirection:'row', marginTop:25, alignItems:'center'}}>
+            <View style={{flex:2}}>
               <Text style={{fontSize:20, textAlign:'center'}}><Text style={{fontWeight:'bold', fontSize: 36}}>{d[3]}</Text> USD</Text>
               <Text style={{fontSize:20, textAlign:'center'}}>{d[4]}</Text>
             </View>
-            <View style={{flex:1}}>
+            <View style={{flex:3}}>
+              <Image source={chartImage[d[0]]} style={{width: 200, height: 100, resizeMode: "contain", alignSelf:'center', justifyContent:'center'}}/>
             </View>
           </View>
         </View>
