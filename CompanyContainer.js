@@ -5,6 +5,8 @@ import React, {
   Text,
   View,
   Image,
+  Picker,
+  TimePickerAndroid,
 } from 'react-native';
 
 
@@ -37,6 +39,22 @@ class CompanyContainer extends Component {
 
   }
 
+  async showDatePicker(v, p) {
+    if (p!=0){
+      try {
+        const {action, minute, hour} = await TimePickerAndroid.open();
+        if (action === TimePickerAndroid.timeSetAction) {
+
+        } else if (action === TimePickerAndroid.dismissedAction) {
+
+        }
+
+      } catch ({code, message}) {
+        console.warn("Error"+message);
+      }
+    }
+  }
+
   render(){
     var d = data[this.props.company];
     return this.props.company ? (<View style={{height: 500, alignSelf:'stretch'}}>
@@ -53,7 +71,14 @@ class CompanyContainer extends Component {
             </View>
           </View>
         </View>
-        <View style={{flex:1,backgroundColor:'white'}}>
+        <View style={{flex:1,backgroundColor:'white', flexDirection: 'column'}}>
+          <Picker
+            style={{width:100}}
+            selectedValue={"java"}
+            onValueChange={this.showDatePicker.bind(this)}>
+            <Picker.Item label="Java" value="java" />
+            <Picker.Item label="JavaScript" value="js" />
+          </Picker>
           <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
         </View>
       </View>)
