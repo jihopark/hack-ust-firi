@@ -42,6 +42,8 @@ const data = [
 
 const fakePic = [require('./assets/3M.png'),require('./assets/2Y.png'),require('./assets/2Y-20.png'),require('./assets/2Y-20-40.png'),require('./assets/2Y.png')];
 
+
+
 class CompanyContainer extends Component {
   componentWillMount(){
     this.data = this.setData(data);
@@ -103,10 +105,14 @@ class CompanyContainer extends Component {
             <Text>Debate</Text>
             <Picker
               style={{width:20}}
-              selectedValue={"java"}
+              selectedValue={""}
               onValueChange={this.showDatePicker.bind(this)}>
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+              <Picker.Item label={"Simple Moving Average"} value={"Simple Moving Average"} />
+              <Picker.Item label={"Exponential Moving Average"} value={"Exponential Moving Average"} />
+              <Picker.Item label={"Bollinger Bands"} value={"Bollinger Bands"} />
+              <Picker.Item label={"Volume"} value={"Volume"} />
+              <Picker.Item label={"Volatility"} value={"Volatility"} />
+              <Picker.Item label={"Benchmarking Index"} value={"Benchmarking Index"} />
             </Picker>
           </View>
           <Image resizeMode={"cover"} source={fakePic[this.props.count%5]} style={{width:500}} />
